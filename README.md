@@ -23,6 +23,7 @@ Four Keys works well with projects that have deployments. Projects with releases
 
 For a quick baseline of your team's software delivery performance, use can also use the [DORA DevOps Quick Check](https://www.devops-research.com/quickcheck.html). The quick check also suggests DevOps capabilities you can work on to improve your performance. The Four Keys project itself can help you improve the following DevOps capabilities:
 
+
 *   [Monitoring and observability](https://cloud.google.com/solutions/devops/devops-measurement-monitoring-and-observability)
 *   [Monitoring systems to inform business decisions](https://cloud.google.com/solutions/devops/devops-measurement-monitoring-systems)
 *   [Visual management capabilities](https://cloud.google.com/solutions/devops/devops-measurement-visual-management)
