@@ -29,6 +29,7 @@
 
 
 schedule_bq_queries(){
+  export PARENT_PROJECT=$(gcloud config get-value project)
   echo "Check BigQueryDataTransfer is enabled" 
   enabled=$(gcloud services list --enabled --filter name:bigquerydatatransfer.googleapis.com)
 
@@ -39,14 +40,16 @@ schedule_bq_queries(){
   done
 
   cd ../queries/
-  pip3 install -r requirements.txt -q --user
+  # grpcio fails on local ok in cloud shell using these extra commands help with the install
+  pip3 install --no-cache-dir --force-reinstall -Iv -r requirements.txt -q
   token=$(gcloud auth print-access-token)
 
   echo "Creating BigQuery scheduled queries for derived tables.."; set -x
 
-  python3 schedule.py --query_file=changes.sql --table=changes --access_token=${token}
-  python3 schedule.py --query_file=deployments.sql --table=deployments  --access_token=${token}
-  python3 schedule.py --query_file=incidents.sql --table=incidents --access_token=${token}
+    #refactored how auth is used nolonger need the auth token
+    python3 schedule.py --query_file=changes.sql --table=changes
+    python3 schedule.py --query_file=deployments.sql --table=deployments
+    python3 schedule.py --query_file=incidents.sql --table=incidents
 
   set +x; echo
   cd ${DIR}

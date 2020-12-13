@@ -16,18 +16,17 @@
 from absl import app
 from absl import flags
 import google.oauth2.credentials
+from google.oauth2 import service_account
 from google.cloud import bigquery_datatransfer_v1
 import google.protobuf.json_format
-import os
 
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('table', '', 'Table name for scheduled query output')
 flags.DEFINE_string('query_file', '', 'Query to schedule')
-flags.DEFINE_string('access_token', '', 'Access token from `gcloud auth print-access-token`')
 
-PROJECT_ID = os.environ.get("FOURKEYS_PROJECT")
-
+# hard coded for now
+PROJECT_ID = "four-metrics"
 
 def get_bq_client():
     # If the BigQuery DataTransfer API has been enabled recently, there is sometimes a delay.
@@ -35,8 +34,8 @@ def get_bq_client():
     retry = True
     while retry is True:
         try:
-            # Set up the client
-            credentials = google.oauth2.credentials.Credentials(FLAGS.access_token)
+            # Set up the credentials from a file
+            credentials = service_account.Credentials.from_service_account_file('/users/gripp/repos/fourkeys/queries/token.json')
             client = bigquery_datatransfer_v1.DataTransferServiceClient(credentials=credentials)
             parent = client.project_path(PROJECT_ID)
             retry = False
