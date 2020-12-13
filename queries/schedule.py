@@ -19,14 +19,13 @@ import google.oauth2.credentials
 from google.oauth2 import service_account
 from google.cloud import bigquery_datatransfer_v1
 import google.protobuf.json_format
-import os
 
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('table', '', 'Table name for scheduled query output')
 flags.DEFINE_string('query_file', '', 'Query to schedule')
 
-#hard coded for now
+# hard coded for now
 PROJECT_ID = "four-metrics"
 
 def get_bq_client():
