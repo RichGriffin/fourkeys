@@ -28,6 +28,7 @@ flags.DEFINE_string('query_file', '', 'Query to schedule')
 # hard coded for now
 PROJECT_ID = "four-metrics"
 
+
 def get_bq_client():
     # If the BigQuery DataTransfer API has been enabled recently, there is sometimes a delay.
     # Script will retry until the API settings have propagated
