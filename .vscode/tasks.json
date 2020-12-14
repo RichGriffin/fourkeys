@@ -1,0 +1,7 @@
+{
+  "command": "/usr/bin/python",
+  "args": ["${file}"],
+  "env": {},
+  "envFile": "${workspaceRoot}/.env",
+  "pythonPath": "${config:python.pythonPath}"
+}

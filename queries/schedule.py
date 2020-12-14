@@ -36,7 +36,7 @@ def get_bq_client():
     while retry is True:
         try:
             # Set up the credentials from a file
-            credentials = service_account.Credentials.from_service_account_file('/users/gripp/repos/fourkeys/queries/token.json')
+            credentials = service_account.Credentials.from_service_account_file('/users/gripp/repos/fourkeys/token.json')
             client = bigquery_datatransfer_v1.DataTransferServiceClient(credentials=credentials)
             parent = client.project_path(PROJECT_ID)
             retry = False
